@@ -78,47 +78,99 @@ public class BinarySearchTree<E> implements BinaryTreeInfo  {
 		return true;
 	}
 	
+//	public void preorderTraversal() {
+//		preorderTraveral(rootNode);
+//	}
+//	
+//	private void preorderTraveral(Node<E> node) {
+//		if (node == null) return; 
+//		System.out.println(node.element);
+//		// 递归调用
+//		preorderTraveral(node.left);
+//		preorderTraveral(node.right);
+//	}
+	
+//	public void inorderTraversal() {
+//		inorderTraversal(rootNode);
+//	}
+//	
+//	private void inorderTraversal(Node<E> node) {
+//		if (node == null) return;
+//		inorderTraversal(node.left);
+//		System.out.println(node.element);
+//		inorderTraversal(node.right);
+//	}
+	
+//	public void postorderTraversal() {
+//		postorderTraversal(rootNode);
+//	}
+//	
+//	private void postorderTraversal(Node<E> node) {
+//		if (node == null) return;
+//		postorderTraversal(node.left);
+//		postorderTraversal(node.right);
+//		System.out.println(node.element);
+//	}
+	
+//	public void levelOrderTraversal() {
+//		if (rootNode == null) return;
+//		Queue<Node<E>> queue = new LinkedList<>();
+//		queue.offer(rootNode); // 入队
+//		
+//		while (!queue.isEmpty()) {
+//			 Node<E> node = queue.poll(); // 出队
+//			 System.out.println(node.element);
+//			if (node.left != null) {
+//				queue.offer(node.left);
+//			}
+//			if (node.right != null) {
+//				queue.offer(node.right);
+//			}
+//		}
+//	}
+	
 	/**
-	 * 前序遍历：顺序==>根节点、前序遍历左子树、前序遍历右子树
+	 * 前序遍历：顺序->根节点、前序遍历左子树、前序遍历右子树
 	 */
-	public void preorderTraversal() {
-		preorderTraveral(rootNode);
+	public void preOrder(Visitor<E> visitor) {
+		preOrder(visitor, rootNode);
 	}
 	
-	private void preorderTraveral(Node<E> node) {
+	private void preOrder(Visitor<E> visitor, Node<E> node) {
 		if (node == null) return; 
-		System.out.println(node.element);
+		visitor.visit(node.element);
 		// 递归调用
-		preorderTraveral(node.left);
-		preorderTraveral(node.right);
+		preOrder(visitor, node.left);
+		preOrder(visitor, node.right);
 	}
 	
 	/**
-	 * 中序遍历：顺序==>中序遍历左子树、根节点、中序遍历右子树
+	 * 中序遍历：顺序->中序遍历左子树、根节点、中序遍历右子树
 	 */
-	public void inorderTraversal() {
-		inorderTraversal(rootNode);
+	
+	public void inOrder(Visitor<E> visitor) {
+		inOrder(visitor, rootNode);
 	}
 	
-	private void inorderTraversal(Node<E> node) {
+	private void inOrder(Visitor<E> visitor, Node<E> node) {
 		if (node == null) return;
-		inorderTraversal(node.left);
-		System.out.println(node.element);
-		inorderTraversal(node.right);
+		inOrder(visitor, node.left);
+		visitor.visit(node.element);
+		inOrder(visitor, node.right);
 	}
 	
 	/**
-	 * 后序遍历：顺序==>后序遍历左子树、后序遍历右子、树根节点、
+	 * 后序遍历：顺序->后序遍历左子树、后序遍历右子树、树根节点、
 	 */
-	public void postorderTraversal() {
-		postorderTraversal(rootNode);
+	public void postOrder(Visitor<E> visitor) {
+		postOrder(visitor, rootNode);
 	}
 	
-	private void postorderTraversal(Node<E> node) {
+	private void postOrder(Visitor<E> visitor, Node<E> node) {
 		if (node == null) return;
-		postorderTraversal(node.left);
-		postorderTraversal(node.right);
-		System.out.println(node.element);
+		postOrder(visitor, node.left);
+		postOrder(visitor, node.right);
+		visitor.visit(node.element);
 	}
 	
 	/**
@@ -130,14 +182,15 @@ public class BinarySearchTree<E> implements BinaryTreeInfo  {
 	 * b.将A节点的左节点入队（A节点的左节点不为空）
 	 * c.将A节点的右节点入队（A节点的右节点不为空）
 	 */
-	public void levelOrderTraversal() {
+	public void levelOrder(Visitor<E> visitor) {
 		if (rootNode == null) return;
 		Queue<Node<E>> queue = new LinkedList<>();
 		queue.offer(rootNode); // 入队
-		
 		while (!queue.isEmpty()) {
 			 Node<E> node = queue.poll(); // 出队
-			 System.out.println(node.element);
+
+			 visitor.visit(node.element);
+			 
 			if (node.left != null) {
 				queue.offer(node.left);
 			}
@@ -145,6 +198,11 @@ public class BinarySearchTree<E> implements BinaryTreeInfo  {
 				queue.offer(node.right);
 			}
 		}
+	}
+	
+	//公共内部接口
+	public static interface Visitor<E> {
+		void visit(E element);
 	}
 	
 	/**

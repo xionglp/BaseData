@@ -2,6 +2,7 @@ package kdm;
 
 import java.util.Comparator;
 
+import kdm.BinarySearchTree.Visitor;
 import printer.BinaryTrees;
 
 public class Main {
@@ -26,7 +27,34 @@ public class Main {
 			bst1.add(data[i]);
 		}
 		BinaryTrees.println(bst1);
-		bst1.levelOrderTraversal();
+		
+		//前序遍历
+		bst1.preOrder(new Visitor<Integer>() {
+			public void visit(Integer element) {
+				System.out.print("_" + element + "_");
+			}
+		});
+		
+		//中序遍历
+//		bst1.inOrder(new Visitor<Integer>() {
+//			public void visit(Integer element) {
+//				System.out.print("_" + element + "_");
+//			}
+//		});
+		
+		// 后序遍历
+//		bst1.postOrder(new Visitor<Integer>() {
+//			public void visit(Integer element) {
+//				System.out.print("_" + element + "_");
+//			}
+//		});
+		
+		//层序遍历
+//		bst1.levelOrder(new Visitor<Integer>() {
+//			public void visit(Integer element) {
+//				System.out.print("_" + element + "_");
+//			}
+//		});
 	}
 	
 	/**
