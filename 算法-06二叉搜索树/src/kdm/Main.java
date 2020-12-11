@@ -12,7 +12,6 @@ public class Main {
 //			return e1.age - e2.age;
 //		}
 //	 }
-	 // 123
 	
 	/**
 	 * integer类型
@@ -27,6 +26,7 @@ public class Main {
 			bst1.add(data[i]);
 		}
 		BinaryTrees.println(bst1);
+		bst1.levelOrderTraversal();
 	}
 	
 	/**

@@ -1,6 +1,8 @@
 package kdm;
 
 import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.Queue;
 
 import printer.BinaryTreeInfo;
 
@@ -74,6 +76,75 @@ public class BinarySearchTree<E> implements BinaryTreeInfo  {
 	//是否包含节点
 	public boolean contains(E element) {
 		return true;
+	}
+	
+	/**
+	 * 前序遍历：顺序==>根节点、前序遍历左子树、前序遍历右子树
+	 */
+	public void preorderTraversal() {
+		preorderTraveral(rootNode);
+	}
+	
+	private void preorderTraveral(Node<E> node) {
+		if (node == null) return; 
+		System.out.println(node.element);
+		// 递归调用
+		preorderTraveral(node.left);
+		preorderTraveral(node.right);
+	}
+	
+	/**
+	 * 中序遍历：顺序==>中序遍历左子树、根节点、中序遍历右子树
+	 */
+	public void inorderTraversal() {
+		inorderTraversal(rootNode);
+	}
+	
+	private void inorderTraversal(Node<E> node) {
+		if (node == null) return;
+		inorderTraversal(node.left);
+		System.out.println(node.element);
+		inorderTraversal(node.right);
+	}
+	
+	/**
+	 * 后序遍历：顺序==>后序遍历左子树、后序遍历右子、树根节点、
+	 */
+	public void postorderTraversal() {
+		postorderTraversal(rootNode);
+	}
+	
+	private void postorderTraversal(Node<E> node) {
+		if (node == null) return;
+		postorderTraversal(node.left);
+		postorderTraversal(node.right);
+		System.out.println(node.element);
+	}
+	
+	/**
+	 * 层序遍历：从上到下，从左到右依次遍历每个节点
+	 * 实现思路：利用队列
+	 * 1、将根节点入队
+	 * 2、循环执行以下操作，知道队列为空
+	 * a.将队列A的头节点出队，进行访问
+	 * b.将A节点的左节点入队（A节点的左节点不为空）
+	 * c.将A节点的右节点入队（A节点的右节点不为空）
+	 */
+	public void levelOrderTraversal() {
+		if (rootNode == null) return;
+		Queue<Node<E>> queue = new LinkedList<>();
+		queue.offer(rootNode); // 入队
+		
+		while (!queue.isEmpty()) {
+			 Node<E> node = queue.poll(); // 出队
+			 System.out.println(node.element);
+			if (node.left != null) {
+				queue.offer(node.left);
+			}
+			if (node.right != null) {
+				queue.offer(node.right);
+			}
+		}
 	}
 	
 	/**
