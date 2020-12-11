@@ -78,7 +78,6 @@ public class Main {
 		BinaryTrees.println(bst1);
 	}
 	
-
 	static void testMath() {
 		BinarySearchTree<Integer> bst1 = new BinarySearchTree<>();
 		for (int i = 0; i < 30; i++) {
