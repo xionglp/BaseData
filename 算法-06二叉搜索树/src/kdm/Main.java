@@ -2,7 +2,7 @@ package kdm;
 
 import java.util.Comparator;
 
-import kdm.printer.BinaryTrees;
+import printer.BinaryTrees;
 
 public class Main {
 
@@ -61,7 +61,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		testMath();
+		testInteger();
 		
 	}
 

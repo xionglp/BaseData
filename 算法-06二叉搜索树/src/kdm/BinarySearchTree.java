@@ -2,7 +2,7 @@ package kdm;
 
 import java.util.Comparator;
 
-import kdm.printer.BinaryTreeInfo;
+import printer.BinaryTreeInfo;
 
 // 二叉搜索树
 @SuppressWarnings("unchecked")
