@@ -78,57 +78,6 @@ public class BinarySearchTree<E> implements BinaryTreeInfo  {
 		return true;
 	}
 	
-//	public void preorderTraversal() {
-//		preorderTraveral(rootNode);
-//	}
-//	
-//	private void preorderTraveral(Node<E> node) {
-//		if (node == null) return; 
-//		System.out.println(node.element);
-//		// 递归调用
-//		preorderTraveral(node.left);
-//		preorderTraveral(node.right);
-//	}
-	
-//	public void inorderTraversal() {
-//		inorderTraversal(rootNode);
-//	}
-//	
-//	private void inorderTraversal(Node<E> node) {
-//		if (node == null) return;
-//		inorderTraversal(node.left);
-//		System.out.println(node.element);
-//		inorderTraversal(node.right);
-//	}
-	
-//	public void postorderTraversal() {
-//		postorderTraversal(rootNode);
-//	}
-//	
-//	private void postorderTraversal(Node<E> node) {
-//		if (node == null) return;
-//		postorderTraversal(node.left);
-//		postorderTraversal(node.right);
-//		System.out.println(node.element);
-//	}
-	
-//	public void levelOrderTraversal() {
-//		if (rootNode == null) return;
-//		Queue<Node<E>> queue = new LinkedList<>();
-//		queue.offer(rootNode); // 入队
-//		
-//		while (!queue.isEmpty()) {
-//			 Node<E> node = queue.poll(); // 出队
-//			 System.out.println(node.element);
-//			if (node.left != null) {
-//				queue.offer(node.left);
-//			}
-//			if (node.right != null) {
-//				queue.offer(node.right);
-//			}
-//		}
-//	}
-	
 	/**
 	 * 前序遍历：顺序->根节点、前序遍历左子树、前序遍历右子树
 	 */
@@ -215,7 +164,6 @@ public class BinarySearchTree<E> implements BinaryTreeInfo  {
 		return ((Comparable<E>)e1).compareTo(e2);
 		
 //		return e1.compareTo(e2);
-//		return 0;
 	}
 	
 	private void elementNotNullCheck(E element) {
