@@ -149,6 +149,124 @@ public class BinarySearchTree<E> implements BinaryTreeInfo  {
 		}
 	}
 	
+	/**
+	 * 判断是否为完全二叉树
+	 */
+	public boolean isCompleteSearchTree() {
+		if (rootNode == null) return false;
+		Queue<Node<E>> queue = new LinkedList<>();
+		queue.offer(rootNode);
+		boolean leaf = false;
+		while (!queue.isEmpty()) {
+			Node<E> node = queue.poll();
+			if (leaf && !node.isLeaf()) return false;
+			
+			if (node.left != null) {
+				queue.offer(node.left);
+			} else if (node.right != null) {
+				return false;
+			}
+			
+			if (node.right != null) {
+				queue.offer(node.right);
+			} else {
+				leaf = true;
+			}
+//			if (node.ishasTowChildrenNode()) {
+//				queue.offer(node.left);
+//				queue.offer(node.right);
+//			} else if (node.left == null && node.right != null ) {
+//				return false;
+//			} else { // 后面遍历的节点都必须是叶子节点
+//				leaf = true;
+//				if (node.left != null) {
+//					queue.offer(node.left);
+//				}
+//			}
+		}
+		return true;
+	}
+	
+	/**
+	 * 二叉树的高度
+	 */
+	public int heightTree() {
+		if (rootNode == null) return 0;
+		Queue<Node<E>> queue = new LinkedList<>();
+		queue.offer(rootNode);
+		
+		// 二叉树的高度
+		int height = 0;
+		// 二叉树每一层的节点数量
+		int levelSize = 1;
+		while (!queue.isEmpty()) {
+			Node<E> node = queue.poll();
+			levelSize --;
+			
+			if (node.left != null) {
+				queue.offer(node.left);
+			}
+			
+			if (node.right != null) {
+				queue.offer(node.right);
+			}
+			
+			if (levelSize == 0) { // 意味着即将访问下一层
+				levelSize = queue.size();
+				height++;
+			}
+		}
+		return height;
+	}
+
+	/**
+	 *  前驱节点: 中序遍历时的前一个节点
+	 * @param node
+	 * @return
+	 */
+	private Node<E> predecessor(Node<E> node) {
+		
+		// 前驱节点在左子树中
+		Node<E> preNode = node.left;
+		if (node.left != null) {
+			while (preNode.right != null) {
+				preNode = preNode.right;
+			}
+			return preNode;
+		}
+		
+		// 从父节点、祖父节点中寻找前驱节点
+		while (node.parent != null && node == node.parent.left) {
+			node = node.parent;
+		}
+		
+		return node.parent;
+	}
+
+	/**
+	 *  后驱节点: 中序遍历时的后一个节点
+	 * @param node
+	 * @return
+	 */
+	private Node<E> successor(Node<E> node) {
+		
+		// 前驱节点在右子树中
+		Node<E> preNode = node.right;
+		if (node.right != null) {
+			while (preNode.left != null) {
+				preNode = preNode.left;
+			}
+			return preNode;
+		}
+		
+		// 从父节点、祖父节点中寻找后驱节点
+		while (node.parent != null && node == node.parent.right) {
+			node = node.parent;
+		}
+		
+		return node.parent;
+	}
+	
 	//公共内部接口
 	public static interface Visitor<E> {
 		void visit(E element);
@@ -162,8 +280,6 @@ public class BinarySearchTree<E> implements BinaryTreeInfo  {
 			return comparator.compare(e1, e2);
 		}
 		return ((Comparable<E>)e1).compareTo(e2);
-		
-//		return e1.compareTo(e2);
 	}
 	
 	private void elementNotNullCheck(E element) {
@@ -176,12 +292,19 @@ public class BinarySearchTree<E> implements BinaryTreeInfo  {
 		E element;
 		Node<E> left;
 		Node<E> right;
-		@SuppressWarnings("unused")
 		Node<E> parent;
 		
 		public Node(E element, Node<E> parentNode) {
 			this.element = element;
 			this.parent = parentNode;
+		}
+		
+		public boolean isLeaf() {
+			return left == null && right == null;
+		}
+		
+		public boolean ishasTowChildrenNode( ) {
+			return left != null && right != null;
 		}
 	}
 

@@ -19,7 +19,7 @@ public class Main {
 	 */
 	static void testInteger() {
 		Integer data[] = new Integer[] {
-			7, 4, 9, 2, 5, 8, 11, 3, 1, 12
+			7, 4, 9, 2, 5, 8, 11, 3, 1
 		};
 
 		BinarySearchTree<Integer> bst1 = new BinarySearchTree<>();
@@ -29,11 +29,11 @@ public class Main {
 		BinaryTrees.println(bst1);
 		
 		//前序遍历
-		bst1.preOrder(new Visitor<Integer>() {
-			public void visit(Integer element) {
-				System.out.print("_" + element + "_");
-			}
-		});
+//		bst1.preOrder(new Visitor<Integer>() {
+//			public void visit(Integer element) {
+//				System.out.print("_" + element + "_");
+//			}
+//		});
 		
 		//中序遍历
 //		bst1.inOrder(new Visitor<Integer>() {
@@ -55,6 +55,9 @@ public class Main {
 //				System.out.print("_" + element + "_");
 //			}
 //		});
+		
+		System.out.println("二叉树的高度：" + bst1.heightTree());
+		System.out.println(bst1.isCompleteSearchTree());
 	}
 	
 	/**
